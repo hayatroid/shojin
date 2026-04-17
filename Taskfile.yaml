@@ -1,0 +1,15 @@
+version: 3
+
+tasks:
+  build:
+    dir: "{{.USER_WORKING_DIR}}"
+    cmds:
+      - g++ -O2 -std=c++11 -pipe -DONLINE_JUDGE -Wall -Wextra {{.CLI_ARGS}}.cpp
+        -lm -o {{.CLI_ARGS}}
+  run:
+    dir: "{{.USER_WORKING_DIR}}"
+    deps:
+      - build
+    cmds:
+      - defer: rm -f ./{{.CLI_ARGS}}
+      - ./{{.CLI_ARGS}}
